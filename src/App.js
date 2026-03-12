@@ -1,25 +1,18 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import ProjectsPage from "./Pages/ProjectPage";
+import TasksPage from "./Pages/TaskPage";
+import CommentPage from "./Pages/CommentPage";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ProjectsPage />} />
+        <Route path="/get/taskbyproject/:id" element={<TasksPage/>} />
+        <Route path="/get/commentbytask/:id" element={<CommentPage/>} />
+      </Routes>
+    </BrowserRouter>
   );
-}
-
-export default App;
+}export default App;
