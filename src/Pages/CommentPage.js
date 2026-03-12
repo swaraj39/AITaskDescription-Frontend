@@ -2,17 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function CommentsPage() {
-  const { taskId } = useParams(); // taskId from URL
+  const { taskId } = useParams();
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     fetch(`http://localhost:8090/get/allbytask/${taskId}`)
       .then((res) => res.json())
-      .then((data) => {setComments(data);
-        console.log(data);
-  })
-      .catch((err) => console.error(err));
+      .then((data) => {
+        setComments(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [taskId]);
+
+  if (loading) {
+    return (
+      <div style={styles.center}>
+        <div style={styles.spinner}></div>
+        <h2>Loading Comments...</h2>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.container}>
@@ -84,6 +100,23 @@ const styles = {
     color: "#2c3e50",
     fontSize: "14px",
   },
+  center: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "15px"
+  },
+
+  spinner: {
+    width: "40px",
+    height: "40px",
+    border: "4px solid #ddd",
+    borderTop: "4px solid #4f46e5",
+    borderRadius: "50%",
+    animation: "spin 1s linear infinite"
+  }
 };
 
 export default CommentsPage;

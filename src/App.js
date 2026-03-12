@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProjectsPage />} />
         <Route path="/get/taskbyproject/:id" element={<TasksPage/>} />
-        <Route path="/get/commentbytask/:id" element={<CommentPage/>} />
+        <Route path="/get/commentbytask/:taskId" element={<CommentPage/>} />
       </Routes>
     </BrowserRouter>
   );
