@@ -50,7 +50,7 @@ function ProjectsPage() {
       await axios.post("http://localhost:8090/add/project", newProject);
 //hello
       setShowModal(false);
-
+      console.log(newProject);
       setNewProject({
         projectName: "",
         projectDescription: ""
